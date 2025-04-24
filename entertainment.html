@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini MarketCity - Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f3f4f6;
+        }
+        .movie-placeholder {
+            width: 100%;
+            height: 256px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        .vikram-bg { background-color: #3498db; }
+        .goodbadugly-bg { background-color: #e74c3c; }
+        .retro-bg { background-color: #2ecc71; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div class="flex items-center py-4">
+                        <a href="index.html" class="flex items-center">
+                            <span class="font-semibold text-gray-500 text-lg">Mini MarketCity</span>
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="index.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
+                        <a href="brands.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Brands</a>
+                        <a href="entertainment.html" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Entertainment</a>
+                        <a href="map.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Mall Map</a>
+                        <a href="lost-found.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Lost & Found</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Entertainment Section -->
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8">Entertainment</h1>
+
+        <!-- Cinema Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Cinema</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="/static/images/entertainment/vikram.jpg" alt="Vikram" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Vikram</h3>
+                        <p class="text-gray-600 mb-2">Showtimes: 11:30 AM, 2:30 PM, 5:30 PM</p>
+                        <p class="text-gray-600 mb-4">Duration: 1h 58m</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="/static/images/entertainment/goodbadugly.jpg" alt="Good Bad Ugly" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Good Bad Ugly</h3>
+                        <p class="text-gray-600 mb-2">Showtimes: 12:00 PM, 3:30 PM, 7:00 PM</p>
+                        <p class="text-gray-600 mb-4">Duration: 3h 1m</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="/static/images/entertainment/retro.jpg" alt="Retro" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Retro</h3>
+                        <p class="text-gray-600 mb-2">Showtimes: 1:00 PM, 4:30 PM, 8:00 PM</p>
+                        <p class="text-gray-600 mb-4">Duration: 2h 2m</p>
+                        <button class="book-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gaming Zone -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Gaming Zone</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="/static/images/gaming/vr.jpg" alt="Gaming Zone" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Virtual Reality Games</h3>
+                        <p class="text-gray-600 mb-2">Experience immersive VR gaming</p>
+                        <p class="text-gray-600">Price: ₹500/hour</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="/static/images/gaming/arcade.jpg" alt="Gaming Zone" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Arcade Games</h3>
+                        <p class="text-gray-600 mb-2">Classic and modern arcade games</p>
+                        <p class="text-gray-600">Price: ₹100/token</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="/static/images/gaming/console.jpg" alt="Gaming Zone" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold mb-2">Console Gaming</h3>
+                        <p class="text-gray-600 mb-2">Play the latest console games</p>
+                        <p class="text-gray-600">Price: ₹300/hour</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4">Upcoming Events</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <img src="/static/images/events/comedy-night.jpg" alt="Comedy Night" class="w-full h-64 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Comedy Night</h3>
+                    <p class="text-gray-600 mb-2">Date: June 15, 2024</p>
+                    <p class="text-gray-600 mb-2">Time: 8:00 PM</p>
+                    <p class="text-gray-600">Location: Entertainment Zone</p>
+                    <button class="book-btn">Book Tickets</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <img src="/static/images/events/kids-festival.jpg" alt="Kids Festival" class="w-full h-64 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Kids Festival</h3>
+                    <p class="text-gray-600 mb-2">Date: June 20, 2024</p>
+                    <p class="text-gray-600 mb-2">Time: 10:00 AM - 6:00 PM</p>
+                    <p class="text-gray-600">Location: Entertainment Zone</p>
+                    <button class="book-btn">Book Tickets</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p>Email: info@minimarketcity.com</p>
+                    <p>Phone: +91 1234567890</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Opening Hours</h3>
+                    <p>Monday - Sunday: 10:00 AM - 10:00 PM</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

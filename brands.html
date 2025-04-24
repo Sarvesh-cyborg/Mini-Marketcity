@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini MarketCity - Brands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div class="flex items-center py-4">
+                        <a href="index.html" class="flex items-center">
+                            <span class="font-semibold text-gray-500 text-lg">Mini MarketCity</span>
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="index.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
+                        <a href="brands.html" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Brands</a>
+                        <a href="entertainment.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Entertainment</a>
+                        <a href="map.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Mall Map</a>
+                        <a href="lost-found.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Lost & Found</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search and Filter Section -->
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <input type="text" 
+                           id="searchInput" 
+                           placeholder="Search brands..." 
+                           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="w-full md:w-64">
+                    <select id="categoryFilter" 
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Categories</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Food & Beverage">Food & Beverage</option>
+                        <option value="Sports">Sports</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brands Grid -->
+        <div id="brandsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Brands will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p>Email: info@minimarketcity.com</p>
+                    <p>Phone: +91 1234567890</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Opening Hours</h3>
+                    <p>Monday - Sunday: 10:00 AM - 10:00 PM</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to fetch and display brands
+        async function loadBrands() {
+            try {
+                const response = await fetch('http://localhost:5000/api/brands');
+                const brands = await response.json();
+                
+                const brandsGrid = document.getElementById('brandsGrid');
+                brandsGrid.innerHTML = ''; // Clear existing content
+                
+                brands.forEach(brand => {
+                    const brandCard = document.createElement('div');
+                    brandCard.className = 'bg-white rounded-lg shadow-md overflow-hidden';
+                    brandCard.innerHTML = `
+                        <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">${brand.name}</h3>
+                            <p class="text-gray-600 mb-2">${brand.category}</p>
+                            <p class="text-gray-600 mb-2">${brand.location}</p>
+                            <p class="text-gray-600 mb-2">${brand.hours}</p>
+                            <p class="text-gray-600">${brand.description}</p>
+                        </div>
+                    `;
+                    brandsGrid.appendChild(brandCard);
+                });
+            } catch (error) {
+                console.error('Error loading brands:', error);
+                document.getElementById('brandsGrid').innerHTML = '<p class="text-red-500">Error loading brands. Please try again later.</p>';
+            }
+        }
+
+        // Load brands when page loads
+        document.addEventListener('DOMContentLoaded', loadBrands);
+
+        // Search and filter functionality
+        document.getElementById('searchInput').addEventListener('input', filterBrands);
+        document.getElementById('categoryFilter').addEventListener('change', filterBrands);
+
+        function filterBrands() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            
+            const brandCards = document.querySelectorAll('#brandsGrid > div');
+            brandCards.forEach(card => {
+                const brandName = card.querySelector('h3').textContent.toLowerCase();
+                const brandCategory = card.querySelector('p').textContent;
+                
+                const matchesSearch = brandName.includes(searchText);
+                const matchesCategory = !category || brandCategory === category;
+                
+                card.style.display = matchesSearch && matchesCategory ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html> 

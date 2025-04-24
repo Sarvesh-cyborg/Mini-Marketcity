@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini MarketCity - Lost & Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div class="flex items-center py-4">
+                        <a href="index.html" class="flex items-center">
+                            <span class="font-semibold text-gray-500 text-lg">Mini MarketCity</span>
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="index.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
+                        <a href="brands.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Brands</a>
+                        <a href="entertainment.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Entertainment</a>
+                        <a href="map.html" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Mall Map</a>
+                        <a href="lost-found.html" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Lost & Found</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8">Lost & Found</h1>
+
+        <!-- Lost and Found Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6">Lost & Found</h2>
+            
+            <!-- Report Lost Item Form -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4">Report Lost Item</h3>
+                <form id="reportForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Item Name</label>
+                        <input type="text" name="item_name" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Description</label>
+                        <textarea name="description" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Date Lost</label>
+                        <input type="date" name="date_lost" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Contact Information</label>
+                        <input type="text" name="reporter_contact" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+                        Report Item
+                    </button>
+                </form>
+            </div>
+
+            <!-- Found Items List -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4">Found Items</h3>
+                <div id="foundItemsList" class="space-y-4">
+                    <!-- Found items will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Found Items Section -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4">Recently Found Items</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="foundItems">
+                <!-- Found items will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <p>Email: info@minimarketcity.com</p>
+                    <p>Phone: +91 1234567890</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Opening Hours</h3>
+                    <p>Monday - Sunday: 10:00 AM - 10:00 PM</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to fetch and display found items
+        async function loadFoundItems() {
+            try {
+                const response = await fetch('http://localhost:5000/api/found-items');
+                const items = await response.json();
+                
+                const foundItemsList = document.getElementById('foundItemsList');
+                foundItemsList.innerHTML = ''; // Clear existing content
+                
+                items.forEach(item => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'bg-white rounded-lg shadow-md p-6';
+                    itemCard.innerHTML = `
+                        <h4 class="text-lg font-semibold mb-2">${item.item_name}</h4>
+                        <p class="text-gray-600 mb-2">${item.description}</p>
+                        <p class="text-gray-600 mb-2">Date Lost: ${item.date_lost}</p>
+                        <p class="text-gray-600 mb-2">Status: ${item.status}</p>
+                        ${item.date_found ? `<p class="text-gray-600 mb-2">Date Found: ${item.date_found}</p>` : ''}
+                        ${item.found_location ? `<p class="text-gray-600">Found Location: ${item.found_location}</p>` : ''}
+                    `;
+                    foundItemsList.appendChild(itemCard);
+                });
+            } catch (error) {
+                console.error('Error loading found items:', error);
+                document.getElementById('foundItemsList').innerHTML = '<p class="text-red-500">Error loading found items. Please try again later.</p>';
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('reportForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/lost-found/report', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        item_name: formData.get('item_name'),
+                        description: formData.get('description'),
+                        date_lost: formData.get('date_lost'),
+                        reporter_contact: formData.get('reporter_contact')
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Item reported successfully!');
+                    e.target.reset();
+                    loadFoundItems(); // Refresh the list
+                } else {
+                    const data = await response.json();
+                    alert(data.error || 'Failed to report item');
+                }
+            } catch (error) {
+                console.error('Error reporting item:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+        // Load found items when page loads
+        document.addEventListener('DOMContentLoaded', loadFoundItems);
+    </script>
+</body>
+</html> 
